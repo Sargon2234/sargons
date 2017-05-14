@@ -1,22 +1,10 @@
-from cur_scrap import CurrencyScrapper
-from finance.models import Providers
+from finance.Services.cur_scrap import CurrencyScrapper
 
 
 class CurrencyHandler(CurrencyScrapper):
-    def process(self):
-        data = self.get_data()
-        self.insertData(data, True)
+    def __init__(self):
+        super().__init__()
 
-    def get_data(self):
-        parsedUsd = CurrencyScrapper.main(self, 'usd')
+    def get_data(self, currency='usd'):
+        parsedUsd = CurrencyScrapper.main(self, currency)
         return parsedUsd
-
-    def insertData(self, data, providers=False):
-        if providers:
-            for provider in data:
-                newProviders = Providers(provider=provider)
-                newProviders.save()
-
-
-a = CurrencyHandler()
-a.process()

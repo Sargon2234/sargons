@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Currencies(models.Model):
     currency = models.CharField(max_length=5)
 
@@ -16,8 +15,8 @@ class Providers(models.Model):
 
 
 class CurrencyStatus(models.Model):
-    provider_id = models.ForeignKey(Providers, on_delete=models.CASCADE)
-    currency_id = models.ForeignKey(Currencies, on_delete=models.CASCADE)
-    sell = models.DecimalField(max_digits=5, decimal_places=2)
-    buy = models.DecimalField(max_digits=5, decimal_places=2)
+    provider_id = models.IntegerField()
+    currency_id = models.IntegerField()
+    sell = models.DecimalField(max_digits=10, decimal_places=2)
+    buy = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateTimeField()
